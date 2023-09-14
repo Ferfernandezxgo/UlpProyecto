@@ -3,9 +3,14 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
+            <file>file:/C:/Users/ferfe/Documents/NetBeansProjects/universidadejemploparami/src/universidadejemploparami/entidades/Inscripcion.java</file>
+            <file>file:/C:/Users/ferfe/Documents/NetBeansProjects/universidadejemploparami/src/universidadejemploparami/entidades/Materia.java</file>
+            <file>file:/C:/Users/ferfe/Documents/NetBeansProjects/universidadejemploparami/src/universidadejemploparami/accesoadatos/MateriaData.java</file>
             <file>file:/C:/Users/ferfe/Documents/NetBeansProjects/universidadejemploparami/src/universidadejemploparami/Universidadejemploparami.java</file>
             <file>file:/C:/Users/ferfe/Documents/NetBeansProjects/universidadejemploparami/src/universidadejemploparami/accesoadatos/Conexion.java</file>
+            <file>file:/C:/Users/ferfe/Documents/NetBeansProjects/universidadejemploparami/src/universidadejemploparami/entidades/Alumno.java</file>
             <file>file:/C:/Users/ferfe/Documents/NetBeansProjects/universidadejemploparami/src/universidadejemploparami/accesoadatos/AlumnoData.java</file>
+            <file>file:/C:/Users/ferfe/Documents/NetBeansProjects/universidadejemploparami/src/universidadejemploparami/accesoadatos/InscripcionData.java</file>
         </group>
     </open-files>
 </project-private>
