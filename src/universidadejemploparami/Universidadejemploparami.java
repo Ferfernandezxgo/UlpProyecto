@@ -22,16 +22,16 @@ public class Universidadejemploparami {
     public static void main(String[] args) {
        //Connection con=Conexion.getConexion();
        
-       AlumnoData ad=new AlumnoData();
-       MateriaData md=new MateriaData();
-       InscripcionData id=new InscripcionData();
-       
-       Alumno Lopez=ad.buscarAlumno(1);
-       Materia progra=md.buscarMateria(5);
-       Inscripcion insc=new Inscripcion(Lopez,progra,9);
-       id.guardarInscripcion(insc);
-       
-       
+//       AlumnoData ad=new AlumnoData();
+//       MateriaData md=new MateriaData();
+//       InscripcionData id=new InscripcionData();
+//       
+//       Alumno Lopez=ad.buscarAlumno(1);
+//       Materia progra=md.buscarMateria(5);
+//       Inscripcion insc=new Inscripcion(Lopez,progra,9);
+//       id.guardarInscripcion(insc);
+//       
+            
        
        
     }
