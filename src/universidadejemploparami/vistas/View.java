@@ -52,8 +52,7 @@ public class View extends javax.swing.JFrame {
         jrBotonEstado = new javax.swing.JRadioButton();
         jScrollPane1 = new javax.swing.JScrollPane();
         jtResultado = new javax.swing.JTable();
-        jButton1 = new javax.swing.JButton();
-        jButton2 = new javax.swing.JButton();
+        jbModificar = new javax.swing.JButton();
         jLabel5 = new javax.swing.JLabel();
         jtFecha = new javax.swing.JTextField();
         jMenuBar1 = new javax.swing.JMenuBar();
@@ -111,7 +110,7 @@ public class View extends javax.swing.JFrame {
             }
         });
 
-        jbBuscar.setText("Buscar");
+        jbBuscar.setText("Cargar");
         jbBuscar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jbBuscarActionPerformed(evt);
@@ -131,9 +130,12 @@ public class View extends javax.swing.JFrame {
         ));
         jScrollPane1.setViewportView(jtResultado);
 
-        jButton1.setText("Modificar");
-
-        jButton2.setText("Salir");
+        jbModificar.setText("Modificar");
+        jbModificar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jbModificarActionPerformed(evt);
+            }
+        });
 
         jLabel5.setFont(new java.awt.Font("Ebrima", 0, 14)); // NOI18N
         jLabel5.setForeground(new java.awt.Color(0, 0, 0));
@@ -166,7 +168,9 @@ public class View extends javax.swing.JFrame {
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(jPanel1Layout.createSequentialGroup()
-                                .addGap(0, 98, Short.MAX_VALUE)
+                                .addGap(0, 0, Short.MAX_VALUE)
+                                .addComponent(jbModificar)
+                                .addGap(18, 18, 18)
                                 .addComponent(jbBuscar)
                                 .addGap(82, 82, 82))
                             .addGroup(jPanel1Layout.createSequentialGroup()
@@ -177,12 +181,6 @@ public class View extends javax.swing.JFrame {
                         .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 329, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(54, 54, 54)))
                 .addGap(99, 99, 99))
-            .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGap(370, 370, 370)
-                .addComponent(jButton1)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jButton2)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -214,7 +212,9 @@ public class View extends javax.swing.JFrame {
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(jPanel1Layout.createSequentialGroup()
                                 .addGap(34, 34, 34)
-                                .addComponent(jbBuscar))
+                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                                    .addComponent(jbBuscar)
+                                    .addComponent(jbModificar)))
                             .addGroup(jPanel1Layout.createSequentialGroup()
                                 .addGap(20, 20, 20)
                                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -224,10 +224,6 @@ public class View extends javax.swing.JFrame {
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addGap(37, 37, 37)
                         .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 224, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(jButton1)
-                            .addComponent(jButton2))
                         .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
         );
 
@@ -317,6 +313,23 @@ public class View extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_jtDocumentoActionPerformed
 
+    private void jbModificarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbModificarActionPerformed
+        
+        int filaSeleccionada=jtResultado.getSelectedRow(); /*se selecciona la fila para poder nodificarla
+                                                                en la base de datos*/
+        
+        int documento=Integer.parseInt(modelo.getValueAt(filaSeleccionada,1).toString());
+        String apellido=modelo.getValueAt(filaSeleccionada,2).toString();
+        String nombre=modelo.getValueAt(filaSeleccionada,3).toString();
+        LocalDate fechaNac=LocalDate.parse(modelo.getValueAt(filaSeleccionada,4).toString());
+        boolean estado=Boolean.parseBoolean(modelo.getValueAt(filaSeleccionada, 5).toString());
+        Alumno alumnoActual=new Alumno(documento,apellido,nombre,fechaNac,estado);
+        AlumnoData alumnoData=new AlumnoData();
+        alumnoData.modificarAlumno(alumnoActual);
+        
+       
+    }//GEN-LAST:event_jbModificarActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -353,8 +366,6 @@ public class View extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton jButton1;
-    private javax.swing.JButton jButton2;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
@@ -373,6 +384,7 @@ public class View extends javax.swing.JFrame {
     private javax.swing.JPopupMenu jPopupMenu2;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JButton jbBuscar;
+    private javax.swing.JButton jbModificar;
     private javax.swing.JLabel jlLogo;
     private javax.swing.JMenu jmAdministracion;
     private javax.swing.JMenu jmAlumno;
