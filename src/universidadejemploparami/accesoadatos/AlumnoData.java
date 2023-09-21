@@ -26,7 +26,7 @@ public class AlumnoData {
         
         try {
               PreparedStatement ps=con.prepareStatement(sql,Statement.RETURN_GENERATED_KEYS);
-              ps.setInt(1, alumno.getDni());
+              
               ps.setString(2,alumno.getApellido());
               ps.setString(3,alumno.getNombre());
               ps.setDate(4,Date.valueOf(alumno.getFechaNac())); // pasamos de LocalDate a Date
@@ -66,7 +66,7 @@ public class AlumnoData {
             if(rs.next()){
                 alumno=new Alumno();
                 alumno.setIdAlumno(id);
-                alumno.setDni(rs.getInt("dni"));
+          
                 alumno.setApellido(rs.getString("apellido"));
                 alumno.setNombre(rs.getString("nombre"));
                 alumno.setFechaNac(rs.getDate("fechaNacimiento").toLocalDate());
@@ -103,7 +103,7 @@ public class AlumnoData {
             if(rs.next()){
                 alumno=new Alumno();
                 alumno.setIdAlumno(rs.getInt("idAlumno"));
-                alumno.setDni(rs.getInt("dni"));
+                
                 alumno.setApellido(rs.getString("nombre"));
                 alumno.setFechaNac(rs.getDate("fechaNacimiento").toLocalDate());
                 alumno.setEstado(true);
@@ -131,7 +131,7 @@ public class AlumnoData {
             while(rs.next()){
                 Alumno alumno=new Alumno();
                 alumno.setIdAlumno(rs.getInt("idAlumno"));
-                alumno.setDni(rs.getInt("dni"));
+                
                 alumno.setApellido(rs.getString("apellido"));
                 alumno.setNombre(rs.getString("nombre"));
                 alumno.setFechaNac(rs.getDate("fechaNacimiento").toLocalDate());
@@ -156,7 +156,7 @@ public class AlumnoData {
         PreparedStatement ps=null;
         try{
             ps=con.prepareStatement(SQL);
-            ps.setInt(1,alumno.getDni());
+            
             ps.setString(2, alumno.getApellido());
             ps.setString(3, alumno.getNombre());
             ps.setDate(4, Date.valueOf(alumno.getFechaNac()));

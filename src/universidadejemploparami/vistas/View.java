@@ -4,23 +4,21 @@
  */
 package universidadejemploparami.vistas;
 
-import java.time.LocalDate;
-import java.util.Date;
-import javax.swing.table.DefaultTableModel;
+import java.awt.event.ActionEvent;
+import java.util.TreeSet;
 import universidadejemploparami.accesoadatos.AlumnoData;
 import universidadejemploparami.entidades.Alumno;
 
 
 public class View extends javax.swing.JFrame {
-        
-    private DefaultTableModel modelo;
+    public static TreeSet<Alumno> listaAlumnos=new TreeSet<>();
+    
 
     
     public View() {
+        AlumnoData alu=new AlumnoData();
         initComponents();
-        miTabla();
-        
-        
+       
     }
 
     /**
@@ -32,234 +30,73 @@ public class View extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        jMenuBar2 = new javax.swing.JMenuBar();
-        jMenu3 = new javax.swing.JMenu();
-        jMenu4 = new javax.swing.JMenu();
-        jPopupMenu1 = new javax.swing.JPopupMenu();
-        jPopupMenu2 = new javax.swing.JPopupMenu();
-        jMenu6 = new javax.swing.JMenu();
-        jMenu1 = new javax.swing.JMenu();
-        jPanel1 = new javax.swing.JPanel();
-        jlLogo = new javax.swing.JLabel();
-        jLabel1 = new javax.swing.JLabel();
-        jLabel2 = new javax.swing.JLabel();
-        jLabel3 = new javax.swing.JLabel();
-        jLabel4 = new javax.swing.JLabel();
-        jtDocumento = new javax.swing.JTextField();
-        jtApellido = new javax.swing.JTextField();
-        jtNombre = new javax.swing.JTextField();
-        jbBuscar = new javax.swing.JButton();
-        jrBotonEstado = new javax.swing.JRadioButton();
-        jScrollPane1 = new javax.swing.JScrollPane();
-        jtResultado = new javax.swing.JTable();
-        jbModificar = new javax.swing.JButton();
-        jLabel5 = new javax.swing.JLabel();
-        jtFecha = new javax.swing.JTextField();
+        escritorio = new javax.swing.JDesktopPane();
         jMenuBar1 = new javax.swing.JMenuBar();
         jmAlumno = new javax.swing.JMenu();
-        jmFormularioAlumno = new javax.swing.JMenuItem();
-        jmFormularioMateria = new javax.swing.JMenu();
-        jMenuItem2 = new javax.swing.JMenuItem();
+        jmFormAlu = new javax.swing.JMenuItem();
+        jmMateria = new javax.swing.JMenu();
+        jmFormMate = new javax.swing.JMenuItem();
         jmAdministracion = new javax.swing.JMenu();
+        jmManejoInsc = new javax.swing.JMenuItem();
         jmManipulacionNotas = new javax.swing.JMenuItem();
-        jMenuItem3 = new javax.swing.JMenuItem();
         jmConsultas = new javax.swing.JMenu();
-        jmConsultasMaterias = new javax.swing.JMenuItem();
+        jmAlumnosPorMateria = new javax.swing.JMenuItem();
         jmSalir = new javax.swing.JMenu();
 
-        jMenu3.setText("File");
-        jMenuBar2.add(jMenu3);
-
-        jMenu4.setText("Edit");
-        jMenuBar2.add(jMenu4);
-
-        jMenu6.setText("jMenu6");
-
-        jMenu1.setText("jMenu1");
-
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setPreferredSize(new java.awt.Dimension(1024, 768));
 
-        jPanel1.setBackground(new java.awt.Color(0, 153, 204));
-        jPanel1.setForeground(new java.awt.Color(0, 153, 255));
+        escritorio.setPreferredSize(new java.awt.Dimension(1024, 768));
 
-        jlLogo.setBackground(new java.awt.Color(51, 0, 255));
-        jlLogo.setForeground(new java.awt.Color(0, 102, 204));
-        jlLogo.setIcon(new javax.swing.ImageIcon("C:\\Users\\ferfe\\Downloads\\logo-ulp.png")); // NOI18N
-        jlLogo.setDebugGraphicsOptions(javax.swing.DebugGraphics.NONE_OPTION);
-
-        jLabel1.setBackground(new java.awt.Color(51, 51, 51));
-        jLabel1.setFont(new java.awt.Font("Ebrima", 0, 14)); // NOI18N
-        jLabel1.setForeground(new java.awt.Color(0, 0, 0));
-        jLabel1.setText("Documento");
-
-        jLabel2.setFont(new java.awt.Font("Ebrima", 0, 14)); // NOI18N
-        jLabel2.setForeground(new java.awt.Color(0, 0, 0));
-        jLabel2.setText("Apellido:");
-
-        jLabel3.setFont(new java.awt.Font("Ebrima", 0, 14)); // NOI18N
-        jLabel3.setForeground(new java.awt.Color(0, 0, 0));
-        jLabel3.setText("Nombre:");
-
-        jLabel4.setFont(new java.awt.Font("Ebrima", 0, 14)); // NOI18N
-        jLabel4.setForeground(new java.awt.Color(0, 0, 0));
-        jLabel4.setText("Estado");
-
-        jtDocumento.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jtDocumentoActionPerformed(evt);
-            }
-        });
-
-        jbBuscar.setText("Cargar");
-        jbBuscar.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jbBuscarActionPerformed(evt);
-            }
-        });
-
-        jtResultado.setModel(new javax.swing.table.DefaultTableModel(
-            new Object [][] {
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null}
-            },
-            new String [] {
-                "Title 1", "Title 2", "Title 3", "Title 4"
-            }
-        ));
-        jScrollPane1.setViewportView(jtResultado);
-
-        jbModificar.setText("Modificar");
-        jbModificar.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jbModificarActionPerformed(evt);
-            }
-        });
-
-        jLabel5.setFont(new java.awt.Font("Ebrima", 0, 14)); // NOI18N
-        jLabel5.setForeground(new java.awt.Color(0, 0, 0));
-        jLabel5.setText("Fecha de Nacimiento");
-
-        javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
-        jPanel1.setLayout(jPanel1Layout);
-        jPanel1Layout.setHorizontalGroup(
-            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel1Layout.createSequentialGroup()
-                .addContainerGap()
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(jLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(jLabel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(jLabel3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(jLabel4, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(jrBotonEstado))
-                    .addComponent(jLabel5))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jtDocumento, javax.swing.GroupLayout.PREFERRED_SIZE, 234, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jtApellido, javax.swing.GroupLayout.PREFERRED_SIZE, 234, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(42, 42, 42)
-                        .addComponent(jlLogo, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(jPanel1Layout.createSequentialGroup()
-                                .addGap(0, 0, Short.MAX_VALUE)
-                                .addComponent(jbModificar)
-                                .addGap(18, 18, 18)
-                                .addComponent(jbBuscar)
-                                .addGap(82, 82, 82))
-                            .addGroup(jPanel1Layout.createSequentialGroup()
-                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                                    .addComponent(jtFecha, javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(jtNombre, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 234, Short.MAX_VALUE))
-                                .addGap(0, 0, Short.MAX_VALUE)))
-                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 329, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(54, 54, 54)))
-                .addGap(99, 99, 99))
+        javax.swing.GroupLayout escritorioLayout = new javax.swing.GroupLayout(escritorio);
+        escritorio.setLayout(escritorioLayout);
+        escritorioLayout.setHorizontalGroup(
+            escritorioLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 1024, Short.MAX_VALUE)
         );
-        jPanel1Layout.setVerticalGroup(
-            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGap(36, 36, 36)
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(jLabel1)
-                            .addComponent(jtDocumento, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(46, 46, 46)
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(jLabel2)
-                            .addComponent(jtApellido, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addContainerGap()
-                        .addComponent(jlLogo, javax.swing.GroupLayout.PREFERRED_SIZE, 149, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGap(19, 19, 19)
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(jLabel3)
-                            .addComponent(jtNombre, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 33, Short.MAX_VALUE)
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(jLabel5)
-                            .addComponent(jtFecha, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(8, 8, 8)
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(jPanel1Layout.createSequentialGroup()
-                                .addGap(34, 34, 34)
-                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                                    .addComponent(jbBuscar)
-                                    .addComponent(jbModificar)))
-                            .addGroup(jPanel1Layout.createSequentialGroup()
-                                .addGap(20, 20, 20)
-                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(jrBotonEstado)
-                                    .addComponent(jLabel4))))
-                        .addGap(197, 197, 197))
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGap(37, 37, 37)
-                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 224, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
+        escritorioLayout.setVerticalGroup(
+            escritorioLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 768, Short.MAX_VALUE)
         );
 
         jmAlumno.setText("Alumno");
-
-        jmFormularioAlumno.setText("Formulario de Alumno");
-        jmFormularioAlumno.addActionListener(new java.awt.event.ActionListener() {
+        jmAlumno.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jmFormularioAlumnoActionPerformed(evt);
+                jmAlumnoActionPerformed(evt);
             }
         });
-        jmAlumno.add(jmFormularioAlumno);
+
+        jmFormAlu.setText("Formulario de alumno");
+        jmFormAlu.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jmFormAluActionPerformed(evt);
+            }
+        });
+        jmAlumno.add(jmFormAlu);
 
         jMenuBar1.add(jmAlumno);
 
-        jmFormularioMateria.setText("Materia");
+        jmMateria.setText("Materia");
 
-        jMenuItem2.setText("Formulario de Materia");
-        jmFormularioMateria.add(jMenuItem2);
+        jmFormMate.setText("Formulario de Materias");
+        jmMateria.add(jmFormMate);
 
-        jMenuBar1.add(jmFormularioMateria);
+        jMenuBar1.add(jmMateria);
 
-        jmAdministracion.setText("Administracion");
+        jmAdministracion.setText("Administraciòn");
 
-        jmManipulacionNotas.setText("Manejo de Incripciones");
+        jmManejoInsc.setText("Manejo de inscripciones");
+        jmAdministracion.add(jmManejoInsc);
+
+        jmManipulacionNotas.setText("Manipulacion de notas");
         jmAdministracion.add(jmManipulacionNotas);
-
-        jMenuItem3.setText("Manipulacion de Notas");
-        jmAdministracion.add(jMenuItem3);
 
         jMenuBar1.add(jmAdministracion);
 
         jmConsultas.setText("Consultas");
 
-        jmConsultasMaterias.setText("Alumnos por Materia");
-        jmConsultas.add(jmConsultasMaterias);
+        jmAlumnosPorMateria.setText("Alumnos por materia");
+        jmConsultas.add(jmAlumnosPorMateria);
 
         jMenuBar1.add(jmConsultas);
 
@@ -272,63 +109,37 @@ public class View extends javax.swing.JFrame {
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 0, Short.MAX_VALUE))
+            .addComponent(escritorio, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addComponent(escritorio, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(0, 0, Short.MAX_VALUE))
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void jmFormularioAlumnoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jmFormularioAlumnoActionPerformed
+    /*
+    private void jmAlumnoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jmAlumnoActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_jmFormularioAlumnoActionPerformed
-
-    private void jbBuscarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbBuscarActionPerformed
-         int registroDocumento= Integer.valueOf(jtDocumento.getText());
-         String registroApellido=jtApellido.getText();
-         String registroNombre=jtNombre.getText();
-         LocalDate registroFecha=LocalDate.parse(jtFecha.getText());
-         boolean estado=jrBotonEstado.isSelected();
-         Alumno alu=new Alumno(registroDocumento,registroApellido,registroNombre,registroFecha,estado);
-         AlumnoData alumnoData=new AlumnoData();
-         alumnoData.guardarAlumnos(alu);
-         
-         cargarDatos(alu);
-         
-         
-         
-         
-         
         
-    }//GEN-LAST:event_jbBuscarActionPerformed
-
-    private void jtDocumentoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jtDocumentoActionPerformed
+        
+    }//GEN-LAST:event_jmAlumnoActionPerformed
+*/
+    
+    private void jmFormAluActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jmFormAluActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_jtDocumentoActionPerformed
-
-    private void jbModificarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbModificarActionPerformed
-        
-        int filaSeleccionada=jtResultado.getSelectedRow(); /*se selecciona la fila para poder nodificarla
-                                                                en la base de datos*/
-        
-        int documento=Integer.parseInt(modelo.getValueAt(filaSeleccionada,1).toString());
-        String apellido=modelo.getValueAt(filaSeleccionada,2).toString();
-        String nombre=modelo.getValueAt(filaSeleccionada,3).toString();
-        LocalDate fechaNac=LocalDate.parse(modelo.getValueAt(filaSeleccionada,4).toString());
-        boolean estado=Boolean.parseBoolean(modelo.getValueAt(filaSeleccionada, 5).toString());
-        Alumno alumnoActual=new Alumno(documento,apellido,nombre,fechaNac,estado);
+        escritorio.removeAll();
+        escritorio.repaint();
         AlumnoData alumnoData=new AlumnoData();
-        alumnoData.modificarAlumno(alumnoActual);
+        FormularioDeAlumnos fda=new FormularioDeAlumnos(alumnoData);
+        fda.setVisible(true);
+        escritorio.add(fda);
+        escritorio.moveToFront(fda);
         
-       
-    }//GEN-LAST:event_jbModificarActionPerformed
+    }//GEN-LAST:event_jmFormAluActionPerformed
 
     /**
      * @param args the command line arguments
@@ -366,54 +177,17 @@ public class View extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JLabel jLabel1;
-    private javax.swing.JLabel jLabel2;
-    private javax.swing.JLabel jLabel3;
-    private javax.swing.JLabel jLabel4;
-    private javax.swing.JLabel jLabel5;
-    private javax.swing.JMenu jMenu1;
-    private javax.swing.JMenu jMenu3;
-    private javax.swing.JMenu jMenu4;
-    private javax.swing.JMenu jMenu6;
+    private javax.swing.JDesktopPane escritorio;
     private javax.swing.JMenuBar jMenuBar1;
-    private javax.swing.JMenuBar jMenuBar2;
-    private javax.swing.JMenuItem jMenuItem2;
-    private javax.swing.JMenuItem jMenuItem3;
-    private javax.swing.JPanel jPanel1;
-    private javax.swing.JPopupMenu jPopupMenu1;
-    private javax.swing.JPopupMenu jPopupMenu2;
-    private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JButton jbBuscar;
-    private javax.swing.JButton jbModificar;
-    private javax.swing.JLabel jlLogo;
     private javax.swing.JMenu jmAdministracion;
     private javax.swing.JMenu jmAlumno;
+    private javax.swing.JMenuItem jmAlumnosPorMateria;
     private javax.swing.JMenu jmConsultas;
-    private javax.swing.JMenuItem jmConsultasMaterias;
-    private javax.swing.JMenuItem jmFormularioAlumno;
-    private javax.swing.JMenu jmFormularioMateria;
+    private javax.swing.JMenuItem jmFormAlu;
+    private javax.swing.JMenuItem jmFormMate;
+    private javax.swing.JMenuItem jmManejoInsc;
     private javax.swing.JMenuItem jmManipulacionNotas;
+    private javax.swing.JMenu jmMateria;
     private javax.swing.JMenu jmSalir;
-    private javax.swing.JRadioButton jrBotonEstado;
-    private javax.swing.JTextField jtApellido;
-    private javax.swing.JTextField jtDocumento;
-    private javax.swing.JTextField jtFecha;
-    private javax.swing.JTextField jtNombre;
-    private javax.swing.JTable jtResultado;
     // End of variables declaration//GEN-END:variables
-
-   public  void miTabla(){
-       modelo=new DefaultTableModel();
-       modelo.addColumn("Documento");
-       modelo.addColumn("Apellido");
-       modelo.addColumn("Nombre");
-       modelo.addColumn("Estado");
-       jtResultado.setModel(modelo);
-       
-   }
-   private void cargarDatos(Alumno alumno){
-       modelo.addRow(new Object[]{alumno.getDni(),alumno.getApellido(),alumno.getNombre(),alumno.getFechaNac(),alumno.isEstado()});
-   }
-    
-    
 }
