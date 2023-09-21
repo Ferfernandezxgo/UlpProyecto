@@ -105,7 +105,7 @@
                                       <EmptySpace type="separate" max="-2" attributes="0"/>
                                       <Component id="jbBuscar" min="-2" max="-2" attributes="0"/>
                                   </Group>
-                                  <Component id="jrbEstado" min="-2" max="-2" attributes="0"/>
+                                  <Component id="jRadioButton1" min="-2" max="-2" attributes="0"/>
                               </Group>
                               <EmptySpace min="0" pref="5" max="32767" attributes="0"/>
                           </Group>
@@ -146,7 +146,7 @@
                       <EmptySpace type="separate" max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="3" attributes="0">
                           <Component id="jLabel8" alignment="3" min="-2" pref="25" max="-2" attributes="0"/>
-                          <Component id="jrbEstado" alignment="3" min="-2" max="-2" attributes="0"/>
+                          <Component id="jRadioButton1" alignment="3" min="-2" max="-2" attributes="0"/>
                       </Group>
                       <EmptySpace pref="24" max="32767" attributes="0"/>
                       <Component id="jScrollPane1" min="-2" pref="129" max="-2" attributes="0"/>
@@ -259,6 +259,9 @@
               </Properties>
             </Component>
             <Component class="javax.swing.JTextField" name="jtId">
+              <Properties>
+                <Property name="editable" type="boolean" value="false"/>
+              </Properties>
             </Component>
             <Component class="javax.swing.JLabel" name="jLabel9">
               <Properties>
@@ -271,7 +274,7 @@
                 <Property name="text" type="java.lang.String" value="Id"/>
               </Properties>
             </Component>
-            <Component class="javax.swing.JRadioButton" name="jrbEstado">
+            <Component class="javax.swing.JRadioButton" name="jRadioButton1">
             </Component>
           </SubComponents>
         </Container>

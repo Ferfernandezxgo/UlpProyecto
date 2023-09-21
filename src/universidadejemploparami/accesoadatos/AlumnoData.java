@@ -26,22 +26,26 @@ public class AlumnoData {
         
         try {
               PreparedStatement ps=con.prepareStatement(sql,Statement.RETURN_GENERATED_KEYS);
-              ps.setInt(1, alumno.getDni());
+              ps.setInt(1,alumno.getDni());
               ps.setString(2,alumno.getApellido());
               ps.setString(3,alumno.getNombre());
+              System.out.println("algo");
               ps.setDate(4,Date.valueOf(alumno.getFechaNac())); // pasamos de LocalDate a Date
+              System.out.println("algo2");
               ps.setBoolean(5,alumno.isEstado());  //if reducido
+              System.out.println("algo3");
               ps.executeUpdate();
               ResultSet rs=ps.getGeneratedKeys();
-              if(rs.next()){
+              /*if(rs.next()){
                   alumno.setIdAlumno(rs.getInt("idAlumno"));
-                  JOptionPane.showMessageDialog(null,"Alumno añadido con exito");
+                  
+                
+              
+              
+              }*/
+              
+              JOptionPane.showMessageDialog(null,"Alumno añadido con exito");
               ps.close();
-              
-              }
-              
-              
-              
             
         } catch (SQLException ex) {
             JOptionPane.showMessageDialog(null,"Error al acceder a la tabla Alumno");
@@ -103,8 +107,9 @@ public class AlumnoData {
             if(rs.next()){
                 alumno=new Alumno();
                 alumno.setIdAlumno(rs.getInt("idAlumno"));
-                
-                alumno.setApellido(rs.getString("nombre"));
+                alumno.setDni(rs.getInt("dni"));
+                alumno.setNombre(rs.getString("nombre"));
+                alumno.setApellido(rs.getString("apellido"));
                 alumno.setFechaNac(rs.getDate("fechaNacimiento").toLocalDate());
                 alumno.setEstado(true);
             }else{

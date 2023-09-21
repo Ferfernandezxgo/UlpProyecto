@@ -5,7 +5,7 @@
 package universidadejemploparami.vistas;
 
 import java.time.LocalDate;
-import java.time.format.DateTimeParseException;
+
 import java.util.List;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
@@ -65,7 +65,7 @@ public class FormularioDeAlumnos  extends javax.swing.JInternalFrame {
         jLabel8 = new javax.swing.JLabel();
         jtId = new javax.swing.JTextField();
         jLabel9 = new javax.swing.JLabel();
-        jrbEstado = new javax.swing.JRadioButton();
+        jRadioButton1 = new javax.swing.JRadioButton();
         jPanel1 = new javax.swing.JPanel();
         jLabel6 = new javax.swing.JLabel();
         jbCargar = new javax.swing.JButton();
@@ -129,6 +129,8 @@ public class FormularioDeAlumnos  extends javax.swing.JInternalFrame {
         jLabel8.setForeground(new java.awt.Color(0, 0, 0));
         jLabel8.setText("Estado");
 
+        jtId.setEditable(false);
+
         jLabel9.setFont(new java.awt.Font("Georgia", 3, 14)); // NOI18N
         jLabel9.setForeground(new java.awt.Color(0, 0, 0));
         jLabel9.setText("Id");
@@ -167,7 +169,7 @@ public class FormularioDeAlumnos  extends javax.swing.JInternalFrame {
                                     .addComponent(jtId))
                                 .addGap(18, 18, 18)
                                 .addComponent(jbBuscar))
-                            .addComponent(jrbEstado))
+                            .addComponent(jRadioButton1))
                         .addGap(0, 5, Short.MAX_VALUE))))
         );
         jPanel2Layout.setVerticalGroup(
@@ -198,7 +200,7 @@ public class FormularioDeAlumnos  extends javax.swing.JInternalFrame {
                 .addGap(18, 18, 18)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel8, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jrbEstado))
+                    .addComponent(jRadioButton1))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 24, Short.MAX_VALUE)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 129, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(14, 14, 14))
@@ -298,7 +300,7 @@ public class FormularioDeAlumnos  extends javax.swing.JInternalFrame {
                     alumno.getIdAlumno(),
                     alumno.getApellido(),
                     alumno.getNombre(),
-                    dni, // usa el dni ingresado directamente, porque no creamos un getDni
+                    alumno.getDni(), 
                     alumno.getFechaNac()
                 });
             } else {
@@ -345,11 +347,11 @@ public class FormularioDeAlumnos  extends javax.swing.JInternalFrame {
 
     private void jbCargarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbCargarActionPerformed
         // TODO add your handling code here:
+        String dniObtenido=jtDni.getText();
         String apellido=jtApellido.getText();
         String nombre=jtNombre.getText();
-        String dniObtenido=jtDni.getText();
         String  fechaNacObtenida=jtFechaNac.getText();
-        boolean estado=jrbEstado.isSelected();
+        boolean estado=jRadioButton1.isSelected();
         
         if (!apellido.isEmpty() && !nombre.isEmpty() && !dniObtenido.isEmpty() && !fechaNacObtenida.isEmpty()) {
         try {
@@ -369,7 +371,7 @@ public class FormularioDeAlumnos  extends javax.swing.JInternalFrame {
             jtNombre.setText("");
             jtDni.setText("");
             jtFechaNac.setText("");
-        } catch (NumberFormatException | DateTimeParseException ex) {
+        } catch (NumberFormatException ex) {
             // Maneja los errores si los valores ingresados no son válidos
             JOptionPane.showMessageDialog(this, "Ingresa valores válidos.");
         }
@@ -393,12 +395,12 @@ public class FormularioDeAlumnos  extends javax.swing.JInternalFrame {
     private javax.swing.JLabel jLabel9;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
+    private javax.swing.JRadioButton jRadioButton1;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JButton jbBuscar;
     private javax.swing.JButton jbCargar;
     private javax.swing.JButton jbModificar;
     private javax.swing.JButton jbSalir;
-    private javax.swing.JRadioButton jrbEstado;
     private javax.swing.JTextField jtApellido;
     private javax.swing.JTextField jtDni;
     private javax.swing.JTextField jtFechaNac;
