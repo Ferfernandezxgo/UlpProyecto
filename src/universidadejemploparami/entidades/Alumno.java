@@ -9,7 +9,7 @@ import java.time.LocalDate;
 
 public class Alumno implements Comparable<Alumno> {
     private int idAlumno;
-    
+    private int dni;
     private String apellido;
     private String nombre;
     private LocalDate fechaNac;
@@ -20,7 +20,7 @@ public class Alumno implements Comparable<Alumno> {
 
     public Alumno(int idAlumno, String apellido, String nombre, LocalDate fechaNac, boolean estado) {
         this.idAlumno = idAlumno;
-        
+        this.dni=dni;
         this.apellido = apellido;
         this.nombre = nombre;
         this.fechaNac = fechaNac;
@@ -91,8 +91,12 @@ public class Alumno implements Comparable<Alumno> {
         return this.apellido.compareTo(otroAlumno.getApellido());
     }
 
-    public void setDni(int aInt) {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+    public void setDni(int dni) {
+           this.dni=dni;    
+    }
+
+    public int getDni() {
+        return dni;    
     }
     
             
