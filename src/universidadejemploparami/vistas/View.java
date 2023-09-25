@@ -3,7 +3,9 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java to edit this template
  */
 package universidadejemploparami.vistas;
-
+import java.awt.Graphics;
+import java.awt.Image;
+import javax.swing.*;
 import java.awt.event.ActionEvent;
 import java.util.TreeSet;
 import universidadejemploparami.accesoadatos.AlumnoData;
@@ -30,7 +32,13 @@ public class View extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        escritorio = new javax.swing.JDesktopPane();
+        ImageIcon icono=new ImageIcon(getClass().getResource("/universidadejemploparami/vistas/parqueinformatico.jpg"));
+        Image miImagen=icono.getImage();
+        escritorio = new javax.swing.JDesktopPane(){
+            public void paintComponent(Graphics g){
+                g.drawImage(miImagen,0,0,getWidth(),getHeight(),this);
+            }
+        };
         jMenuBar1 = new javax.swing.JMenuBar();
         jmAlumno = new javax.swing.JMenu();
         jmFormAlu = new javax.swing.JMenuItem();

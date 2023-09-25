@@ -157,26 +157,38 @@ public class AlumnoData {
     }
     
     public void modificarAlumno(Alumno alumno){
-        String SQL="UPDATE alumno set dni=?,apellido=?,nombre=?,fechaNacimiento=? WHERE idAlumno=?";
-        PreparedStatement ps=null;
-        try{
-            ps=con.prepareStatement(SQL);
-            
-            ps.setString(2, alumno.getApellido());
-            ps.setString(3, alumno.getNombre());
-            ps.setDate(4, Date.valueOf(alumno.getFechaNac()));
-            ps.setInt(5, alumno.getIdAlumno());
-            int exito=ps.executeUpdate();
-            
-            if(exito==1){
-                JOptionPane.showMessageDialog(null, "La materia fue modificada con exito");
-            }else{
-                JOptionPane.showMessageDialog(null, "La materia no existe");
+        String SQL = "UPDATE alumno SET dni=?, apellido=?, nombre=?, fechaNacimiento=? WHERE idAlumno=?";
+    PreparedStatement ps = null;
+    try {
+        ps = con.prepareStatement(SQL);
+        ps.setInt(1, alumno.getDni());
+        ps.setString(2, alumno.getApellido());
+        ps.setString(3, alumno.getNombre());
+        ps.setDate(4, Date.valueOf(alumno.getFechaNac()));
+        ps.setInt(5, alumno.getIdAlumno()); // Asegúrate de establecer el ID adecuado
+
+        int exito = ps.executeUpdate();
+
+        if (exito == 1) {
+            JOptionPane.showMessageDialog(null, "El alumno fue modificado con éxito");
+        } else {
+            JOptionPane.showMessageDialog(null, "El alumno no existe o no se pudo modificar");
         }
-    }catch(SQLException ex){
-        JOptionPane.showMessageDialog(null, "error al acceder a la tabla materia") ;
+    } catch (SQLException ex) {
+        // Maneja las excepciones de SQL de manera más detallada
+        ex.printStackTrace();
+        JOptionPane.showMessageDialog(null, "Error al modificar el alumno: " + ex.getMessage());
+    } finally {
+        // Cierra la PreparedStatement
+        if (ps != null) {
+            try {
+                ps.close();
+            } catch (SQLException e) {
+                // Maneja las excepciones de cierre si es necesario
+                e.printStackTrace();
+            }
+        }
     }
-    
     }
     
      public void eliminarAlumno(int id){
