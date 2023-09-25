@@ -167,8 +167,8 @@ public class InscripcionData {
     public List <Materia> obtenerMateriasCursadas(int idAlumno) {
         ArrayList<Materia> materias=new ArrayList<>();
         String sql="Select inscripcion.idMateria, nombre, año FROM inscripcion,"
-                +" materia WHERE inscripcion.idMateria=materia.idMateria"+
-                "AND inscripcion.idAlumno=?;";
+                +" materia WHERE inscripcion.idMateria=materia.idMateria "+
+                " AND inscripcion.idAlumno=?;";
         
         try {
             PreparedStatement ps=con.prepareStatement(sql);
@@ -185,7 +185,7 @@ public class InscripcionData {
             ps.close();
         }catch(SQLException ex){
             JOptionPane.showMessageDialog(null, "Error al acceder ala tabla inscripciones");
-            
+            ex.printStackTrace();
         }
         return materias;
     }
@@ -195,8 +195,8 @@ public class InscripcionData {
 
    public List<Alumno> obtenerAlumnosPorMateria(int idMateria) {
     List<Alumno> alumnos = new ArrayList<>();
-    String sql = "SELECT a.idAlumno,dni,nombre,apellido,FechaNacimiento,estado "
-            + "FROM inscripcion i,alumno a WHERE i.idAlumno=a.idAlumno AND idMateria=?";
+    String sql = " SELECT a.idAlumno,dni,nombre,apellido,FechaNacimiento,estado "
+            + " FROM inscripcion i,alumno a WHERE i.idAlumno=a.idAlumno AND idMateria=?";
 
     
     try {

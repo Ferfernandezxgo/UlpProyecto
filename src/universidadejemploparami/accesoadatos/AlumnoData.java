@@ -22,7 +22,7 @@ public class AlumnoData {
     
     public void guardarAlumnos(Alumno alumno){
         String sql="INSERT INTO alumno (dni,apellido,nombre,fechaNacimiento,estado)"+
-                "VALUES (?,?,?,?,?)";
+                " VALUES (?,?,?,?,?)";
         
         try {
               PreparedStatement ps=con.prepareStatement(sql,Statement.RETURN_GENERATED_KEYS);
@@ -58,7 +58,7 @@ public class AlumnoData {
     public Alumno buscarAlumno(int id){
         Alumno alumno=null;
         
-        String sql="SELECT dni,apellido,nombre,fechaNacimiento FROM alumno WHERE idAlumno=? AND estado=1";
+        String sql=" SELECT dni,apellido,nombre,fechaNacimiento FROM alumno WHERE idAlumno=? AND estado=1";
         PreparedStatement ps=null;
         
         try{
@@ -70,7 +70,7 @@ public class AlumnoData {
             if(rs.next()){
                 alumno=new Alumno();
                 alumno.setIdAlumno(id);
-          
+                alumno.setDni(rs.getInt("dni"));
                 alumno.setApellido(rs.getString("apellido"));
                 alumno.setNombre(rs.getString("nombre"));
                 alumno.setFechaNac(rs.getDate("fechaNacimiento").toLocalDate());
@@ -136,7 +136,7 @@ public class AlumnoData {
             while(rs.next()){
                 Alumno alumno=new Alumno();
                 alumno.setIdAlumno(rs.getInt("idAlumno"));
-                
+                alumno.setDni(rs.getInt("dni"));
                 alumno.setApellido(rs.getString("apellido"));
                 alumno.setNombre(rs.getString("nombre"));
                 alumno.setFechaNac(rs.getDate("fechaNacimiento").toLocalDate());
@@ -193,7 +193,7 @@ public class AlumnoData {
     
      public void eliminarAlumno(int id){
          try{
-             String sql="UPDATE alumno SET estado=0 WHERE idAlumno=?";
+             String sql="UPDATE alumno SET estado = 0 WHERE idAlumno=?";
              PreparedStatement ps=con.prepareStatement(sql);
              ps.setInt(1, id);
              int fila=ps.executeUpdate();

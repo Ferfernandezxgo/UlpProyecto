@@ -11,6 +11,7 @@ import universidadejemploparami.accesoadatos.AlumnoData;
 import universidadejemploparami.accesoadatos.InscripcionData;
 import universidadejemploparami.accesoadatos.MateriaData;
 import universidadejemploparami.entidades.Alumno;
+import universidadejemploparami.entidades.Inscripcion;
 import universidadejemploparami.entidades.Materia;
 
 public class FormularioInscripcion extends javax.swing.JInternalFrame {
@@ -29,7 +30,14 @@ public class FormularioInscripcion extends javax.swing.JInternalFrame {
         aData=new AlumnoData();
         listaA=aData.listarAlumnos();
         modelo=new DefaultTableModel();
+        inscData=new InscripcionData();
+        mData=new MateriaData();
+        
+        
         cargaAlumnos();
+        armarCabecera();
+        
+        
         
         
         
@@ -118,8 +126,8 @@ public class FormularioInscripcion extends javax.swing.JInternalFrame {
                 .addGap(129, 129, 129)
                 .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 153, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(33, 33, 33)
-                .addComponent(cboxAlumno, javax.swing.GroupLayout.PREFERRED_SIZE, 274, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(171, Short.MAX_VALUE))
+                .addComponent(cboxAlumno, javax.swing.GroupLayout.PREFERRED_SIZE, 311, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(134, Short.MAX_VALUE))
         );
         jPanel4Layout.setVerticalGroup(
             jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -153,18 +161,23 @@ public class FormularioInscripcion extends javax.swing.JInternalFrame {
         jrbMateriasNoInscriptas.setFont(new java.awt.Font("Roboto Serif 20pt", 2, 14)); // NOI18N
         jrbMateriasNoInscriptas.setForeground(new java.awt.Color(255, 255, 255));
         jrbMateriasNoInscriptas.setText("Materias no inscriptas");
+        jrbMateriasNoInscriptas.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jrbMateriasNoInscriptasActionPerformed(evt);
+            }
+        });
 
         jttabla.setBorder(javax.swing.BorderFactory.createMatteBorder(1, 1, 1, 1, new java.awt.Color(255, 255, 0)));
         jttabla.setFont(new java.awt.Font("Roboto Serif 20pt", 0, 12)); // NOI18N
         jttabla.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null}
+                {null, null, null},
+                {null, null, null},
+                {null, null, null},
+                {null, null, null}
             },
             new String [] {
-                "alumno", "Title 2", "Title 3", "Title 4"
+                "ID", "Nombre", "Año"
             }
         ));
         jScrollPane2.setViewportView(jttabla);
@@ -173,15 +186,30 @@ public class FormularioInscripcion extends javax.swing.JInternalFrame {
         jbInscribir.setText("Inscribir");
         jbInscribir.setBorder(javax.swing.BorderFactory.createMatteBorder(1, 1, 1, 1, new java.awt.Color(255, 153, 0)));
         jbInscribir.setEnabled(false);
+        jbInscribir.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jbInscribirActionPerformed(evt);
+            }
+        });
 
         jbAInscripcion.setFont(new java.awt.Font("Roboto Serif 20pt", 1, 12)); // NOI18N
         jbAInscripcion.setText("Anular Inscripción");
         jbAInscripcion.setBorder(javax.swing.BorderFactory.createMatteBorder(1, 1, 1, 1, new java.awt.Color(255, 153, 0)));
         jbAInscripcion.setEnabled(false);
+        jbAInscripcion.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jbAInscripcionActionPerformed(evt);
+            }
+        });
 
         jbSalir.setFont(new java.awt.Font("Roboto Serif 20pt", 1, 12)); // NOI18N
         jbSalir.setText("Salir");
         jbSalir.setBorder(javax.swing.BorderFactory.createMatteBorder(1, 1, 1, 1, new java.awt.Color(255, 153, 0)));
+        jbSalir.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jbSalirActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -240,7 +268,50 @@ public class FormularioInscripcion extends javax.swing.JInternalFrame {
         cargaDatosInscriptas();
         jbAInscripcion.setEnabled(true);
         jbInscribir.setEnabled(false);
+        
     }//GEN-LAST:event_jrbMateriasInscriptasActionPerformed
+
+    private void jrbMateriasNoInscriptasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jrbMateriasNoInscriptasActionPerformed
+        // TODO add your handling code here:
+        borrarFilaTabla();
+        jrbMateriasNoInscriptas.setSelected(false);
+        cargaDatosNoInscriptas();
+        jbAInscripcion.setEnabled(false);
+        jbInscribir.setEnabled(true);
+    }//GEN-LAST:event_jrbMateriasNoInscriptasActionPerformed
+
+    private void jbInscribirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbInscribirActionPerformed
+        // TODO add your handling code here:
+        int filaSeleccionada=jttabla.getSelectedRow();
+        if(filaSeleccionada!=-1){
+            Alumno a=(Alumno)cboxAlumno.getSelectedItem();
+            int idMateria=(Integer)modelo.getValueAt(filaSeleccionada, 0);
+            String nombreMateria=(String)modelo.getValueAt(filaSeleccionada, 1);
+            int anio=(Integer)modelo.getValueAt(filaSeleccionada, 2);
+            Materia m=new Materia(idMateria,nombreMateria,anio,true);
+            
+            Inscripcion i=new Inscripcion(a,m,0);
+            inscData.guardarInscripcion(i);
+            borrarFilaTabla();
+        }
+    }//GEN-LAST:event_jbInscribirActionPerformed
+
+    private void jbAInscripcionActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbAInscripcionActionPerformed
+        // TODO add your handling code here:
+        
+        int filaSeleccionada=jttabla.getSelectedRow();
+        if(filaSeleccionada!=-1){
+            Alumno a=(Alumno)cboxAlumno.getSelectedItem();
+            int idMateria=(Integer)modelo.getValueAt(filaSeleccionada, 0);
+            inscData.borrarInscripcionMateriaAlumno(a.getIdAlumno(), idMateria);
+            borrarFilaTabla();
+        }
+    }//GEN-LAST:event_jbAInscripcionActionPerformed
+
+    private void jbSalirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbSalirActionPerformed
+        // TODO add your handling code here:
+        dispose();
+    }//GEN-LAST:event_jbSalirActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

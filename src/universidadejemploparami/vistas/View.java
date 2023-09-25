@@ -22,6 +22,7 @@ public class View extends javax.swing.JFrame {
     public View() {
         AlumnoData alu=new AlumnoData();
         InscripcionData insc=new InscripcionData();
+        insc=null;
         initComponents();
        
     }

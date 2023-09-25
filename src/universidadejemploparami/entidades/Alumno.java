@@ -84,7 +84,7 @@ public class Alumno implements Comparable<Alumno> {
 
     @Override
     public String toString() {
-        return "Alumno{" + "idAlumno=" + idAlumno + ", apellido=" + apellido + ", nombre=" + nombre + '}';
+        return dni+", "+apellido+", "+nombre;
     }
 
     @Override
