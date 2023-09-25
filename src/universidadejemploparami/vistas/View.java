@@ -9,6 +9,8 @@ import javax.swing.*;
 import java.awt.event.ActionEvent;
 import java.util.TreeSet;
 import universidadejemploparami.accesoadatos.AlumnoData;
+import universidadejemploparami.accesoadatos.InscripcionData;
+import universidadejemploparami.accesoadatos.MateriaData;
 import universidadejemploparami.entidades.Alumno;
 
 
@@ -19,6 +21,7 @@ public class View extends javax.swing.JFrame {
     
     public View() {
         AlumnoData alu=new AlumnoData();
+        InscripcionData insc=new InscripcionData();
         initComponents();
        
     }
@@ -94,6 +97,11 @@ public class View extends javax.swing.JFrame {
         jmAdministracion.setText("Administraciòn");
 
         jmManejoInsc.setText("Manejo de inscripciones");
+        jmManejoInsc.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jmManejoInscActionPerformed(evt);
+            }
+        });
         jmAdministracion.add(jmManejoInsc);
 
         jmManipulacionNotas.setText("Manipulacion de notas");
@@ -148,6 +156,18 @@ public class View extends javax.swing.JFrame {
         escritorio.moveToFront(fda);
         
     }//GEN-LAST:event_jmFormAluActionPerformed
+
+    private void jmManejoInscActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jmManejoInscActionPerformed
+        // TODO add your handling code here:
+        escritorio.removeAll();
+        escritorio.repaint();
+        InscripcionData inscripcion=new InscripcionData();
+        FormularioInscripcion fi=new FormularioInscripcion();
+        fi.setVisible(true);
+        escritorio.add(fi);
+        escritorio.moveToFront(fi);
+        
+    }//GEN-LAST:event_jmManejoInscActionPerformed
 
     /**
      * @param args the command line arguments

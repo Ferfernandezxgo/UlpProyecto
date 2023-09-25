@@ -259,7 +259,7 @@ public class FormularioDeAlumnos  extends javax.swing.JInternalFrame {
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(bg, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addComponent(bg, javax.swing.GroupLayout.DEFAULT_SIZE, 795, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -281,7 +281,7 @@ public class FormularioDeAlumnos  extends javax.swing.JInternalFrame {
             
             String nombreCompleto = alumno.getDni()+alumno.getApellido() + " " + alumno.getNombre()+
                     " "+alumno.getFechaNac();
-            jcListaAlumnos.addItem(nombreCompleto);
+            
         }
     }
     
