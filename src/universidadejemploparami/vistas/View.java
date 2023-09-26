@@ -124,11 +124,21 @@ public class View extends javax.swing.JFrame {
         jmConsultas.setText("Consultas");
 
         jmAlumnosPorMateria.setText("Alumnos por materia");
+        jmAlumnosPorMateria.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jmAlumnosPorMateriaActionPerformed(evt);
+            }
+        });
         jmConsultas.add(jmAlumnosPorMateria);
 
         jMenuBar1.add(jmConsultas);
 
         jmSalir.setText("Salir");
+        jmSalir.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jmSalirActionPerformed(evt);
+            }
+        });
         jMenuBar1.add(jmSalir);
 
         setJMenuBar(jMenuBar1);
@@ -203,6 +213,23 @@ public class View extends javax.swing.JFrame {
         escritorio.add(fn);
         escritorio.moveToFront(fn);
     }//GEN-LAST:event_jmManipulacionNotasActionPerformed
+
+    private void jmAlumnosPorMateriaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jmAlumnosPorMateriaActionPerformed
+        // TODO add your handling code here:
+        escritorio.removeAll();
+        escritorio.repaint();
+        MateriaData materiaData=new MateriaData();
+        FormularioConsultaAlumno fcA=new FormularioConsultaAlumno();
+        fcA.setVisible(true);
+        escritorio.add(fcA);
+        escritorio.moveToFront(fcA);
+        
+    }//GEN-LAST:event_jmAlumnosPorMateriaActionPerformed
+
+    private void jmSalirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jmSalirActionPerformed
+        // TODO add your handling code here:
+        
+    }//GEN-LAST:event_jmSalirActionPerformed
 
     /**
      * @param args the command line arguments
