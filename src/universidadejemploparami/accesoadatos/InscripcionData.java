@@ -71,7 +71,7 @@ public class InscripcionData {
 
         while (rs.next()) {
             Inscripcion insc = new Inscripcion();
-            insc.setIdInscripcion(rs.getInt("idInscripto"));
+            insc.setIdInscripcion(rs.getInt("idInscripcion"));
             Alumno alu=aluData.buscarAlumno(rs.getInt("idAlumno"));
             Materia mat=matData.buscarMateria(rs.getInt("idMateria"));
             insc.setAlumno(alu);
@@ -91,11 +91,11 @@ public class InscripcionData {
 }
    
     public void actualizarNota(int idInscripcion, double nota) {
-    String sql = "UPDATE inscripcion SET nota = ? WHERE idInscripto = ?";
+    String sql = "UPDATE inscripcion SET nota = ? WHERE idInscripcion = ?";
 
     try (PreparedStatement ps = con.prepareStatement(sql)) {
-        ps.setDouble(1, nota);
-        ps.setInt(2, idInscripcion);
+        ps.setDouble(2, nota);
+        ps.setInt(1, idInscripcion);
 
         int rowsUpdated = ps.executeUpdate();
 
@@ -119,7 +119,7 @@ public class InscripcionData {
 
         while (rs.next()) {
             Inscripcion insc = new Inscripcion();
-            insc.setIdInscripcion(rs.getInt("idInscripto"));
+            insc.setIdInscripcion(rs.getInt("idInscripcion"));
             Alumno alu=aluData.buscarAlumno(rs.getInt("idAlumno"));
             Materia mat=matData.buscarMateria(rs.getInt("idMateria"));
             insc.setAlumno(alu);

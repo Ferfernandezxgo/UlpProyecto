@@ -117,6 +117,11 @@ public class FormularioInscripcion extends javax.swing.JInternalFrame {
         jLabel2.setText("Seleccione un alumno");
 
         cboxAlumno.setForeground(new java.awt.Color(0, 0, 0));
+        cboxAlumno.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                cboxAlumnoActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel4Layout = new javax.swing.GroupLayout(jPanel4);
         jPanel4.setLayout(jPanel4Layout);
@@ -312,6 +317,10 @@ public class FormularioInscripcion extends javax.swing.JInternalFrame {
         // TODO add your handling code here:
         dispose();
     }//GEN-LAST:event_jbSalirActionPerformed
+
+    private void cboxAlumnoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cboxAlumnoActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_cboxAlumnoActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

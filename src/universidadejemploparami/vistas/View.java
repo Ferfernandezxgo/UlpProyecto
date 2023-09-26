@@ -22,6 +22,7 @@ public class View extends javax.swing.JFrame {
     public View() {
         AlumnoData alu=new AlumnoData();
         InscripcionData insc=new InscripcionData();
+        
         insc=null;
         initComponents();
        
@@ -91,6 +92,11 @@ public class View extends javax.swing.JFrame {
         jmMateria.setText("Materia");
 
         jmFormMate.setText("Formulario de Materias");
+        jmFormMate.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jmFormMateActionPerformed(evt);
+            }
+        });
         jmMateria.add(jmFormMate);
 
         jMenuBar1.add(jmMateria);
@@ -106,6 +112,11 @@ public class View extends javax.swing.JFrame {
         jmAdministracion.add(jmManejoInsc);
 
         jmManipulacionNotas.setText("Manipulacion de notas");
+        jmManipulacionNotas.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jmManipulacionNotasActionPerformed(evt);
+            }
+        });
         jmAdministracion.add(jmManipulacionNotas);
 
         jMenuBar1.add(jmAdministracion);
@@ -169,6 +180,29 @@ public class View extends javax.swing.JFrame {
         escritorio.moveToFront(fi);
         
     }//GEN-LAST:event_jmManejoInscActionPerformed
+
+    private void jmFormMateActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jmFormMateActionPerformed
+        // TODO add your handling code here:
+        escritorio.removeAll();
+        escritorio.repaint();
+        MateriaData materiaData=new MateriaData();
+        FormularioMateria fm=new FormularioMateria();
+        fm.setVisible(true);
+        escritorio.add(fm);
+        escritorio.moveToFront(fm);
+        
+    }//GEN-LAST:event_jmFormMateActionPerformed
+
+    private void jmManipulacionNotasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jmManipulacionNotasActionPerformed
+        // TODO add your handling code here:
+         escritorio.removeAll();
+        escritorio.repaint();
+        MateriaData materiaData=new MateriaData();
+        FormularioNotas fn=new FormularioNotas();
+        fn.setVisible(true);
+        escritorio.add(fn);
+        escritorio.moveToFront(fn);
+    }//GEN-LAST:event_jmManipulacionNotasActionPerformed
 
     /**
      * @param args the command line arguments
