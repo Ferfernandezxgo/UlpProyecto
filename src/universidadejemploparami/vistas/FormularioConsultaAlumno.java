@@ -156,7 +156,7 @@ public class FormularioConsultaAlumno extends javax.swing.JInternalFrame {
 
     // Crea un modelo de tabla
     DefaultTableModel model = new DefaultTableModel();
-
+    //hola
     // Agrega las columnas necesarias al modelo de tabla
     model.addColumn("ID");
     model.addColumn("Nombre");
