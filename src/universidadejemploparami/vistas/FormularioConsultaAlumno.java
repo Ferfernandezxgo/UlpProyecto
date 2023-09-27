@@ -5,20 +5,31 @@
 package universidadejemploparami.vistas;
 
 import java.util.List;
+import javax.swing.table.DefaultTableModel;
 import universidadejemploparami.accesoadatos.AlumnoData;
+import universidadejemploparami.accesoadatos.InscripcionData;
+import universidadejemploparami.accesoadatos.MateriaData;
 import universidadejemploparami.entidades.Alumno;
+import universidadejemploparami.entidades.Materia;
+import static universidadejemploparami.vistas.View.listaAlumnos;
 
 
 
 
 public class FormularioConsultaAlumno extends javax.swing.JInternalFrame {
 
-   private AlumnoData alumnoData=new AlumnoData();
+    private AlumnoData alumnoData;
+    private MateriaData materiaData;
+    private InscripcionData inscData;
+    
+    
     public FormularioConsultaAlumno() {
-        initComponents();
-        alumnoData=new AlumnoData();
-        List<Alumno> listaAlumnos=alumnoData.listarAlumnos();
-        Alumno alumnoNuev=new Alumno();
+         initComponents();
+        alumnoData = new AlumnoData();
+        materiaData = new MateriaData();
+        inscData= new InscripcionData();
+        
+        cargarListaMateriasEnComboBox();
         
     }
 
@@ -54,7 +65,6 @@ public class FormularioConsultaAlumno extends javax.swing.JInternalFrame {
         jLabel2.setForeground(new java.awt.Color(0, 0, 0));
         jLabel2.setText("Seleccione una Materia");
 
-        jcboxAlumnos.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
         jcboxAlumnos.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jcboxAlumnosActionPerformed(evt);
@@ -82,11 +92,11 @@ public class FormularioConsultaAlumno extends javax.swing.JInternalFrame {
                         .addGap(89, 89, 89)
                         .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 247, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jcboxAlumnos, javax.swing.GroupLayout.PREFERRED_SIZE, 261, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(0, 135, Short.MAX_VALUE))
+                        .addComponent(jcboxAlumnos, javax.swing.GroupLayout.PREFERRED_SIZE, 363, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(0, 0, Short.MAX_VALUE))
                     .addGroup(jPanel2Layout.createSequentialGroup()
                         .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 405, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 217, Short.MAX_VALUE)
                         .addComponent(jbSalir, javax.swing.GroupLayout.PREFERRED_SIZE, 116, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addContainerGap())
         );
@@ -137,8 +147,35 @@ public class FormularioConsultaAlumno extends javax.swing.JInternalFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jcboxAlumnosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jcboxAlumnosActionPerformed
-        // TODO add your handling code here:
-        
+    // Obtén la materia seleccionada del JComboBox
+    Materia materiaSeleccionada = (Materia) jcboxAlumnos.getSelectedItem();
+
+    // Llama al método que obtenga los alumnos inscritos en la materia seleccionada
+    int idMateria = materiaSeleccionada.getIdMateria();
+    List<Alumno> alumnosInscritos = inscData.obtenerAlumnosPorMateria(idMateria);
+
+    // Crea un modelo de tabla
+    DefaultTableModel model = new DefaultTableModel();
+
+    // Agrega las columnas necesarias al modelo de tabla
+    model.addColumn("ID");
+    model.addColumn("Nombre");
+    model.addColumn("Apellido");
+    model.addColumn("Fecha de Nacimiento");
+
+    // Llena el modelo con los datos de los alumnos obtenidos
+    for (Alumno alumno : alumnosInscritos) {
+        model.addRow(new Object[] {
+            alumno.getIdAlumno(),
+            alumno.getNombre(),
+            alumno.getApellido(),
+            alumno.getFechaNac()
+        });
+    }
+
+    // Establece el modelo en la tabla
+    jtTablaAlumnos.setModel(model);
+    jtTablaAlumnos.revalidate(); 
         
     }//GEN-LAST:event_jcboxAlumnosActionPerformed
 
@@ -148,25 +185,39 @@ public class FormularioConsultaAlumno extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_jbSalirActionPerformed
 
     
-    private void cargarListaAlumnosEnComboBox() {
-        // Obtén la lista de alumnos desde AlumnoData
-        List<Alumno> listaAlumnos = alumnoData.listarAlumnos();
+    private void cargarListaMateriasEnComboBox() {
+        // Obtén la lista de materias desde MateriaData
+        List<Materia> listaMaterias = materiaData.listarMaterias();
 
-        // Recorre la lista de alumnos y agrégalos al JComboBox
-        for (Alumno alumno : listaAlumnos) {
-            //  se mostrará el alumno en el JComboBox.
-            
-            String nombreCompleto = alumno.getDni()+alumno.getApellido() + " " + alumno.getNombre()+
-                    " "+alumno.getFechaNac();
-            
+        // Limpia el JComboBox antes de agregar las nuevas materias
+        jcboxAlumnos.removeAllItems();
+
+        // Agrega las materias al JComboBox
+        for (Materia materia : listaMaterias) {
+            jcboxAlumnos.addItem(materia);
         }
     }
     
-    private void cargaAlumnos(){
-        for(Alumno item:listaAlumnos){
-            jcboxAlumnos.addItem(item);
+    private void actualizarTablaAlumnos(List<Alumno> alumnos) {
+        // Crea el modelo de la tabla de alumnos con las columnas adecuadas
+        DefaultTableModel modelo = new DefaultTableModel();
+        modelo.addColumn("ID");
+        modelo.addColumn("Nombre");
+        modelo.addColumn("Apellido");
+        modelo.addColumn("Fecha de Nacimiento");
+        // Agrega las filas con los datos de los alumnos
+        for (Alumno alumno : alumnos) {
+            modelo.addRow(new Object[]{
+                alumno.getIdAlumno(),
+                alumno.getNombre(),
+                alumno.getApellido(),
+                alumno.getFechaNac()
+            });
         }
+        // Establece el modelo en la tabla de alumnos
+        jtTablaAlumnos.setModel(modelo);
     }
+
     
     
     
@@ -178,7 +229,7 @@ public class FormularioConsultaAlumno extends javax.swing.JInternalFrame {
     private javax.swing.JPanel jPanel2;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JButton jbSalir;
-    private javax.swing.JComboBox<String> jcboxAlumnos;
+    private javax.swing.JComboBox<Materia> jcboxAlumnos;
     private javax.swing.JTable jtTablaAlumnos;
     // End of variables declaration//GEN-END:variables
 }

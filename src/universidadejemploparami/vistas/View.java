@@ -229,6 +229,7 @@ public class View extends javax.swing.JFrame {
     private void jmSalirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jmSalirActionPerformed
         // TODO add your handling code here:
         
+        System.exit(0);
     }//GEN-LAST:event_jmSalirActionPerformed
 
     /**

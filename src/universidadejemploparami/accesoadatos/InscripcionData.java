@@ -198,28 +198,26 @@ public class InscripcionData {
 
    public List<Alumno> obtenerAlumnosPorMateria(int idMateria) {
     List<Alumno> alumnos = new ArrayList<>();
-    String sql = " SELECT a.idAlumno,dni,nombre,apellido,FechaNacimiento,estado "
-            + " FROM inscripcion i,alumno a WHERE i.idAlumno=a.idAlumno AND idMateria=?";
+    String sql = "SELECT a.idAlumno, dni, nombre, apellido, fechaNacimiento, estado "
+            + "FROM inscripcion i, alumno a WHERE i.idAlumno = a.idAlumno AND idMateria = ?";
 
-    
     try {
-        PreparedStatement ps = con.prepareCall(sql);
+        PreparedStatement ps = con.prepareStatement(sql);
         ps.setInt(1, idMateria);
         ResultSet rs = ps.executeQuery();
-            while (rs.next()) {
-                Alumno alumno = new Alumno();
-                alumno.setIdAlumno(rs.getInt("idAlumno"));
-                alumno.setDni(rs.getInt("dni"));
-                alumno.setNombre(rs.getString("nombre"));
-                alumno.setApellido(rs.getString("apellido"));
-                
-                alumno.setFechaNac(rs.getDate("fechaNacimiento").toLocalDate());
-                alumno.setEstado(rs.getBoolean("estado"));
-
-                alumnos.add(alumno);
-            }
-            ps.close();
         
+        while (rs.next()) {
+            Alumno alumno = new Alumno();
+            alumno.setIdAlumno(rs.getInt("idAlumno"));
+            alumno.setDni(rs.getInt("dni"));
+            alumno.setNombre(rs.getString("nombre"));
+            alumno.setApellido(rs.getString("apellido"));
+            alumno.setFechaNac(rs.getDate("fechaNacimiento").toLocalDate());
+            alumno.setEstado(rs.getBoolean("estado"));
+            alumnos.add(alumno);
+        }
+        rs.close();
+        ps.close();
     } catch (SQLException ex) {
         ex.printStackTrace();
         JOptionPane.showMessageDialog(null, "Error al obtener alumnos por materia: " + ex.getMessage());
@@ -252,4 +250,10 @@ public class InscripcionData {
         }
         return materias;
    }
+
+    @Override
+    public String toString() {
+        return "InscripcionData{" + "matData=" + matData + ", aluData=" + aluData + '}';
+    }
+   
 }

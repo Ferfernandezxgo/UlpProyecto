@@ -272,54 +272,43 @@ public class FormularioMateria extends javax.swing.JInternalFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jbAgregarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbAgregarActionPerformed
-        // TODO add your handling code here:
-        
-        String nombre=jtnombreMateria.getText();
-        
-        int añoMateria;
-        
-        boolean estado = true;
-        try {
-        añoMateria = Integer.parseInt(jtañoMateria.getText());
-    } catch (NumberFormatException e) {
-        // Manejar el caso en el que el año no sea un número válido
-        JOptionPane.showMessageDialog(this, "El año ingresado no es válido.", "Error", JOptionPane.ERROR_MESSAGE);
-        return; // Salir del método sin agregar la materia
-    }
+        // Obtén los datos de los campos
+    String nombre = jtnombreMateria.getText();
+    int añoMateria = 0;
+    boolean estado = true;
 
-    // Validar que los campos no estén vacíos
+    // Validación de entrada
     if (nombre.isEmpty()) {
         JOptionPane.showMessageDialog(this, "Debe ingresar un nombre para la materia.", "Error", JOptionPane.ERROR_MESSAGE);
-        return; // Salir del método sin agregar la materia
+        return;
     }
 
-    // Crear una instancia de Materia con los datos ingresados
-    Materia materiaNueva = new Materia(nombre, añoMateria,estado);
-    if(materia==null){
-            materia=new Materia(nombre,añoMateria,estado);
-            mData.guardarMateria(materia);
-            
-        }else{
-            materia.setNombre(nombre);
-            materia.setAñoMateria(añoMateria);
-            
-            
-        }
-    
-    
-    MateriaData materiaData=new MateriaData();
-    materiaData.guardarMateria(materia);
-    
-    // Agregar la materia a la lista
-    listaM.add(materia);
+    try {
+        añoMateria = Integer.parseInt(jtañoMateria.getText());
+    } catch (NumberFormatException e) {
+        JOptionPane.showMessageDialog(this, "El año ingresado no es válido.", "Error", JOptionPane.ERROR_MESSAGE);
+        return;
+    }
 
-    // Actualizar la tabla
+    // Verifica si ya existe una materia con el mismo nombre y año
+    if (mData.existeMateria(nombre, añoMateria)) {
+        JOptionPane.showMessageDialog(this, "Ya existe una materia con el mismo nombre y año.", "Error", JOptionPane.ERROR_MESSAGE);
+        return;
+    }
+
+    // Crea una nueva materia
+    Materia materiaNueva = new Materia(nombre, añoMateria, estado);
+
+    // Guarda la materia en la base de datos
+    mData.guardarMateria(materiaNueva);
+
+    // Actualiza la lista de materias y la tabla
+    listaM = mData.listarMaterias();
     cargarMaterias();
 
     // Limpia los campos después de agregar la materia
     jtnombreMateria.setText("");
     jtañoMateria.setText("");
-        
     }//GEN-LAST:event_jbAgregarActionPerformed
 
     private void jtañoMateriaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jtañoMateriaActionPerformed
@@ -349,16 +338,25 @@ public class FormularioMateria extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_jbBuscarActionPerformed
 
     private void jbEliminarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbEliminarActionPerformed
-        // TODO add your handling code here:
-        if(materia!=null){
-            mData.eliminarMateria(materia.getIdMateria());
-            materia=null;
-            limpiarCampos();
-            
-        }else{
-            JOptionPane.showMessageDialog(this, "No hay materia seleccionada");
-        }
-        
+        int filaSeleccionada = jtTablaMaterias.getSelectedRow();
+
+    if (filaSeleccionada != -1) {
+        Materia materiaAEliminar = listaM.get(filaSeleccionada);
+
+        // Elimina la materia de la base de datos
+        mData.eliminarMateria(materiaAEliminar.getIdMateria());
+
+        // Elimina la materia de la lista
+        listaM.remove(filaSeleccionada);
+
+        // Actualiza la tabla
+        cargarMaterias();
+
+        // Limpia los campos y la selección
+        limpiarCampos();
+    } else {
+        JOptionPane.showMessageDialog(this, "Por favor, selecciona una materia de la tabla para eliminarla.");
+    }
     }//GEN-LAST:event_jbEliminarActionPerformed
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed

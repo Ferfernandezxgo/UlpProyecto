@@ -8,7 +8,7 @@ package universidadejemploparami.entidades;
 public class Materia {
     private int idMateria;
     private String nombre;
-    private int anioMateria;
+    private int añoMateria;
     private boolean estado;
 
     public Materia() {
@@ -17,13 +17,13 @@ public class Materia {
     public Materia(int idMateria, String nombre, int añoMateria, boolean estado) {
         this.idMateria = idMateria;
         this.nombre = nombre;
-        this.anioMateria = añoMateria;
+        this.añoMateria = añoMateria;
         this.estado = estado;
     }
 
     public Materia(String nombre, int añoMateria, boolean estado) {
         this.nombre = nombre;
-        this.anioMateria = añoMateria;
+        this.añoMateria = añoMateria;
         this.estado = estado;
     }
 
@@ -44,11 +44,11 @@ public class Materia {
     }
 
     public int getAñoMateria() {
-        return anioMateria;
+        return añoMateria;
     }
 
     public void setAñoMateria(int añoMateria) {
-        this.anioMateria = añoMateria;
+        this.añoMateria = añoMateria;
     }
 
     public boolean isEstado() {
@@ -61,7 +61,7 @@ public class Materia {
 
     @Override
     public String toString() {
-        return "Materia{" + "idMateria=" + idMateria + ", nombre=" + nombre + ", a\u00f1oMateria=" + anioMateria + ", estado=" + estado + '}';
+        return   "idMateria=" + idMateria + ", nombre=" + nombre + ", año=" + añoMateria ;
     }
     
     
