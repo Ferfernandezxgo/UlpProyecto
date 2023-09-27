@@ -74,6 +74,7 @@ public class FormularioNotas extends javax.swing.JInternalFrame {
         jScrollPane1 = new javax.swing.JScrollPane();
         jtTablaAlumnos = new javax.swing.JTable();
         jbGuardar = new javax.swing.JButton();
+        jbSalir = new javax.swing.JButton();
 
         jPanel1.setBackground(new java.awt.Color(0, 153, 102));
         jPanel1.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
@@ -89,6 +90,11 @@ public class FormularioNotas extends javax.swing.JInternalFrame {
         jLabel2.setText("Seleccione un alumno");
         jPanel1.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 70, 210, -1));
 
+        jcboxAlumnos.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jcboxAlumnosActionPerformed(evt);
+            }
+        });
         jPanel1.add(jcboxAlumnos, new org.netbeans.lib.awtextra.AbsoluteConstraints(280, 70, 260, -1));
 
         jtTablaAlumnos.setModel(new javax.swing.table.DefaultTableModel(
@@ -114,15 +120,25 @@ public class FormularioNotas extends javax.swing.JInternalFrame {
         });
         jPanel1.add(jbGuardar, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 290, -1, -1));
 
+        jbSalir.setFont(new java.awt.Font("Roboto Serif 20pt", 0, 12)); // NOI18N
+        jbSalir.setText("Salir");
+        jbSalir.setBorder(new javax.swing.border.MatteBorder(null));
+        jbSalir.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jbSalirActionPerformed(evt);
+            }
+        });
+        jPanel1.add(jbSalir, new org.netbeans.lib.awtextra.AbsoluteConstraints(470, 290, 60, 20));
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, 656, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, 367, Short.MAX_VALUE)
         );
 
         pack();
@@ -138,31 +154,54 @@ public class FormularioNotas extends javax.swing.JInternalFrame {
     
     
     private void jbGuardarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbGuardarActionPerformed
-        // Obtén el índice de la fila y la columna seleccionada
-    int filaSeleccionada = jtTablaAlumnos.getSelectedRow();
-    int columnaNota = jtTablaAlumnos.getColumnModel().getColumnIndex("Nota"); // Reemplaza "Nota" con el nombre de la columna de notas en tu tabla.
+     int filaSeleccionada = jtTablaAlumnos.getSelectedRow();
+    int columnaNota = jtTablaAlumnos.getColumnModel().getColumnIndex("Nota");
 
-    // Verifica si se ha seleccionado una fila y que la columna seleccionada sea la de la nota
     if (filaSeleccionada != -1 && columnaNota != -1) {
-        // Reemplaza esta línea con la lógica para obtener la nueva nota que deseas establecer en la celda
-        double nuevaNota = Double.parseDouble(JOptionPane.showInputDialog(this, "Ingrese la nueva nota:"));
+        Double valorNota = (Double) jtTablaAlumnos.getValueAt(filaSeleccionada, columnaNota);
 
-        // Modifica la nota directamente en la celda de la tabla
-        jtTablaAlumnos.setValueAt(nuevaNota, filaSeleccionada, columnaNota);
+        String valorNotaStr = String.valueOf(valorNota);
 
-        // Obtén el ID de inscripción desde tu modelo de tabla o desde los datos subyacentes
-        int idInscripcion = obtenerIdInscripcionDesdeModelo(filaSeleccionada);
+        String nuevaNotaStr = JOptionPane.showInputDialog(this, "Ingrese la nueva nota:", valorNotaStr);
 
-        // Llama al método actualizarNota() de la instancia de InscripcionData para actualizar la nota en la base de datos
-        InscripcionData inscripcionData = new InscripcionData(); // Crea una instancia de InscripcionData
-        inscripcionData.actualizarNota(idInscripcion, nuevaNota);
+        if (nuevaNotaStr != null && !nuevaNotaStr.isEmpty()) {
+            try {
+                double nuevaNota = Double.parseDouble(nuevaNotaStr);
 
-        // Agrega aquí cualquier lógica adicional que desees después de actualizar la nota.
+                jtTablaAlumnos.setValueAt(nuevaNota, filaSeleccionada, columnaNota);
+
+                int idInscripcion = obtenerIdInscripcionDesdeModelo(filaSeleccionada);
+
+                inscData.actualizarNota(idInscripcion, nuevaNota);
+
+                // Agrega aquí cualquier lógica adicional que desees después de actualizar la nota.
+            } catch (NumberFormatException ex) {
+                JOptionPane.showMessageDialog(this, "Ingrese un valor numérico válido para la nota.", "Error", JOptionPane.ERROR_MESSAGE);
+            }
+        }
     } else {
         JOptionPane.showMessageDialog(this, "Por favor, selecciona una fila en la tabla y asegúrate de estar en la columna de la nota.");
     }
+   
 
     }//GEN-LAST:event_jbGuardarActionPerformed
+
+    private void jbSalirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbSalirActionPerformed
+        // TODO add your handling code here:
+        
+        dispose();
+    }//GEN-LAST:event_jbSalirActionPerformed
+
+    private void jcboxAlumnosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jcboxAlumnosActionPerformed
+        // TODO add your handling code here:
+        Alumno alumnoSeleccionado = (Alumno) jcboxAlumnos.getSelectedItem();
+    if (alumnoSeleccionado != null) {
+        cargarDatosNotas(alumnoSeleccionado);
+    } else {
+        // Manejar el caso cuando no se selecciona ningún alumno válido.
+        JOptionPane.showMessageDialog(this, "No se ha seleccionado ningún alumno válido.", "Error", JOptionPane.ERROR_MESSAGE);
+    }
+    }//GEN-LAST:event_jcboxAlumnosActionPerformed
 
 
     
@@ -192,15 +231,20 @@ public class FormularioNotas extends javax.swing.JInternalFrame {
     
     
     private void cargarDatosNotas(Alumno alumno) {
-    // Borra todas las filas existentes en el modelo de la tabla
-    modelo.setRowCount(0);
+    // Llama a InscripcionData para obtener las inscripciones del alumno
     List<Inscripcion> inscripciones = inscData.obtenerInscripcionesPorAlumno(alumno.getIdAlumno());
-    System.out.println("Cantidad de inscripciones para el alumno: " + inscripciones.size());
 
-    // Agrega las notas al modelo de la tabla
+    // Limpia el modelo de la tabla
+    DefaultTableModel modeloTabla = (DefaultTableModel) jtTablaAlumnos.getModel();
+    modeloTabla.setRowCount(0);
+
+    // Agrega las inscripciones al modelo de la tabla
     for (Inscripcion inscripcion : inscripciones) {
-        modelo.addRow(new Object[]{inscripcion.getIdInscripcion(), inscripcion.getMateria().getNombre(), inscripcion.getNota()});
+        modeloTabla.addRow(new Object[]{inscripcion.getIdInscripcion(), inscripcion.getMateria().getNombre(), inscripcion.getNota()});
     }
+    
+    // Establece el modelo actualizado en la tabla
+    jtTablaAlumnos.setModel(modeloTabla);
  
     
 }
@@ -211,6 +255,7 @@ public class FormularioNotas extends javax.swing.JInternalFrame {
     private javax.swing.JPanel jPanel1;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JButton jbGuardar;
+    private javax.swing.JButton jbSalir;
     private javax.swing.JComboBox<Alumno> jcboxAlumnos;
     private javax.swing.JTable jtTablaAlumnos;
     // End of variables declaration//GEN-END:variables

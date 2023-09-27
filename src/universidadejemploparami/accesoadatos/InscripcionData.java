@@ -94,15 +94,18 @@ public class InscripcionData {
     String sql = "UPDATE inscripcion SET nota = ? WHERE idInscripcion = ?";
 
     try (PreparedStatement ps = con.prepareStatement(sql)) {
-        ps.setDouble(2, nota);
-        ps.setInt(1, idInscripcion);
+        
+        ps.setDouble(1, nota);
+        ps.setInt(2, idInscripcion);
+        
+        
 
         int rowsUpdated = ps.executeUpdate();
 
         if (rowsUpdated > 0) {
             JOptionPane.showMessageDialog(null, "Nota actualizada correctamente.");
         } else {
-            JOptionPane.showMessageDialog(null, "No se pudo actualizar la nota.");
+            JOptionPane.showMessageDialog(null, "No se encontro la inscripcion para actualizar");
         }
     } catch (SQLException ex) {
         ex.printStackTrace();

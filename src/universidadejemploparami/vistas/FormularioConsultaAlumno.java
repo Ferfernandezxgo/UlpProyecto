@@ -4,17 +4,22 @@
  */
 package universidadejemploparami.vistas;
 
-/**
- *
- * @author ferfe
- */
+import java.util.List;
+import universidadejemploparami.accesoadatos.AlumnoData;
+import universidadejemploparami.entidades.Alumno;
+
+
+
+
 public class FormularioConsultaAlumno extends javax.swing.JInternalFrame {
 
-    /**
-     * Creates new form FormularioConsultaAlumno
-     */
+   private AlumnoData alumnoData=new AlumnoData();
     public FormularioConsultaAlumno() {
         initComponents();
+        alumnoData=new AlumnoData();
+        List<Alumno> listaAlumnos=alumnoData.listarAlumnos();
+        Alumno alumnoNuev=new Alumno();
+        
     }
 
     /**
@@ -31,7 +36,7 @@ public class FormularioConsultaAlumno extends javax.swing.JInternalFrame {
         jLabel1 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
         jcboxAlumnos = new javax.swing.JComboBox<>();
-        jButton1 = new javax.swing.JButton();
+        jbSalir = new javax.swing.JButton();
         jScrollPane1 = new javax.swing.JScrollPane();
         jtTablaAlumnos = new javax.swing.JTable();
 
@@ -56,10 +61,15 @@ public class FormularioConsultaAlumno extends javax.swing.JInternalFrame {
             }
         });
 
-        jButton1.setBackground(new java.awt.Color(153, 0, 51));
-        jButton1.setFont(new java.awt.Font("Roboto Serif 20pt", 3, 14)); // NOI18N
-        jButton1.setForeground(new java.awt.Color(0, 0, 0));
-        jButton1.setText("Salir");
+        jbSalir.setBackground(new java.awt.Color(153, 0, 51));
+        jbSalir.setFont(new java.awt.Font("Roboto Serif 20pt", 3, 14)); // NOI18N
+        jbSalir.setForeground(new java.awt.Color(0, 0, 0));
+        jbSalir.setText("Salir");
+        jbSalir.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jbSalirActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
@@ -77,7 +87,7 @@ public class FormularioConsultaAlumno extends javax.swing.JInternalFrame {
                     .addGroup(jPanel2Layout.createSequentialGroup()
                         .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 405, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 116, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addComponent(jbSalir, javax.swing.GroupLayout.PREFERRED_SIZE, 116, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addContainerGap())
         );
         jPanel2Layout.setVerticalGroup(
@@ -87,7 +97,7 @@ public class FormularioConsultaAlumno extends javax.swing.JInternalFrame {
                     .addGroup(jPanel2Layout.createSequentialGroup()
                         .addContainerGap()
                         .addComponent(jLabel1))
-                    .addComponent(jButton1))
+                    .addComponent(jbSalir))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 38, Short.MAX_VALUE)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel2)
@@ -132,14 +142,42 @@ public class FormularioConsultaAlumno extends javax.swing.JInternalFrame {
         
     }//GEN-LAST:event_jcboxAlumnosActionPerformed
 
+    private void jbSalirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbSalirActionPerformed
+        // TODO add your handling code here:
+        dispose();
+    }//GEN-LAST:event_jbSalirActionPerformed
+
+    
+    private void cargarListaAlumnosEnComboBox() {
+        // Obtén la lista de alumnos desde AlumnoData
+        List<Alumno> listaAlumnos = alumnoData.listarAlumnos();
+
+        // Recorre la lista de alumnos y agrégalos al JComboBox
+        for (Alumno alumno : listaAlumnos) {
+            //  se mostrará el alumno en el JComboBox.
+            
+            String nombreCompleto = alumno.getDni()+alumno.getApellido() + " " + alumno.getNombre()+
+                    " "+alumno.getFechaNac();
+            
+        }
+    }
+    
+    private void cargaAlumnos(){
+        for(Alumno item:listaAlumnos){
+            jcboxAlumnos.addItem(item);
+        }
+    }
+    
+    
+    
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton jButton1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JButton jbSalir;
     private javax.swing.JComboBox<String> jcboxAlumnos;
     private javax.swing.JTable jtTablaAlumnos;
     // End of variables declaration//GEN-END:variables
